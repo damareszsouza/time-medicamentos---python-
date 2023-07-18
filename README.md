@@ -46,3 +46,35 @@ while True:
             time.sleep(60)
     # Espera 10 segundos antes de verificar novamente o horário
     time.sleep(10)
+
+
+# Diversas rotinas 
+
+import datetime
+import time
+import winsound
+
+# Cria um dicionário vazio para armazenar as informações das rotinas
+rotinas = {}
+
+# Solicita ao usuário que informe as informações das rotinas
+while True:
+    tipo = input("Informe o tipo de rotina (medicamento, banho, exercício), ou digite 'fim' para finalizar: ")
+    if tipo == "fim":
+        break
+    else:
+        horario = input("Informe o horário para a rotina (no formato hh:mm:ss): ")
+        rotinas[tipo] = {"horario": horario}
+
+# Loop infinito para verificar se o horário atual corresponde a algum horário de rotina
+while True:
+    agora = datetime.datetime.now().strftime("%H:%M:%S")
+    for tipo, info in rotinas.items():
+        if agora == info["horario"]:
+            # Toca um som para alertar sobre a rotina
+            winsound.Beep(440, 1000)  # Frequência de 440 Hz por 1 segundo
+            print(f"Lembre-se de fazer {tipo} agora!")
+            # Espera 1 minuto antes de verificar novamente o horário
+            time.sleep(60)
+    # Espera 10 segundos antes de verificar novamente o horário
+    time.sleep(10)
